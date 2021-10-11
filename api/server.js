@@ -17,6 +17,14 @@ const server = express();
 server.use(bodyParser({ extended: false }));
 server.use(helmet());
 server.use(cors(corsOptions));
+
+server.use(function(req, res, next) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	next();
+  });
+
+
 server.use("/api/auth", authRouter);
 server.use("/api/users", usersRouter);
 server.use("/api/potlucks", potlucksRouter);
